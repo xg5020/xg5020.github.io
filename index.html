@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>控制台</title>
+  </head>
+  <style>
+  *{
+    margin:0;
+    padding:0
+    }
+  body{
+    background-color:grey
+    }
+  #ji1,#ji3,#ji5,#ji7,#ji9{
+     color:yellow;
+     text-align:center;
+    }
+  #ji1{
+      display: block;
+      margin-top: 0;
+  }
+  #ji4,#ji6,#ji10{
+     display:block;
+     resize:none;
+     width:100vw;
+     background-color: #4146FE;
+     color: yellow;
+     padding-top: 1vh;
+     padding-bottom: 1vh;
+    }
+  #ji2,#ji8{
+        display: block;
+        margin: 0 auto
+    }
+  button{
+    display:block;
+    margin:0 auto;
+    width:20vw;
+    height:5vh;
+    }
+    #ji2{
+        width: 100vw
+    }
+  </style>
+  <body>
+  <form action="http://xg5020.top/auto/sc.php" method="GET">
+  <div id="ji1">配置[JSON格式]</div>
+      <textarea rows="16" name="pz" id="ji2"></textarea>
+  <div id="ji7">文本</div>   
+      <textarea cols="28" rows="16" name="wenben" id="ji8"></textarea>
+  <div id="ji3">正式服进房</div>
+      <textarea rows="1" name="zurl" id="ji4" required></textarea>
+  <div id="ji5">体验服进房</div>
+      <textarea rows="1" name="turl" id="ji6" required></textarea>
+  <div id="ji9">正式服/体验服</div>
+      <textarea rows="1" name="yx" id="ji10" required></textarea>        
+      <button type="submit" id="button">确定</button>
+  </form>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+            /*
+            var ji2 = document.querySelector("#ji2");
+                ji2.onclick=function (){
+                    ji2.innerText="";                
+                }
+            var ji4 = document.querySelector("#ji4");
+                ji4.onclick=function (){
+                    ji4.innerText="";                
+                }
+            */    
+            $.get(window.location.origin+"/auto/hq.php", function(data) {
+                ji2.innerHTML=data[0].pz;
+                ji8.innerHTML=data[0].wenben;
+                ji4.innerText=data[0].zurl;
+                ji6.innerText=data[0].turl;
+                ji10.innerText=data[0].yx
+            })    
+    </script>  
+  </body>
+</html>

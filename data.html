@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>正在跳转…</title>
+	</head>
+    <style>
+      p{
+        visibility: hidden
+       }
+    </style>
+	<body>
+		<p id="p"></p>
+        <script>
+          var a = document.getElementById("p");
+          a.innerHTML = window.location.href.split("data.html?")[1];
+          //alert(a.innerHTML);
+        </script>
+	</body>
+</html>

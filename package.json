@@ -1,0 +1,19 @@
+{
+  "name": "xg",
+  "version": "1.0",
+  "description": "无",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "关键词",
+    "关键词",
+    "关键词"
+  ],
+  "author": "xg5020",
+  "license": "MIT",
+  "dependencies": {
+    "seedrandom": "^3.0.5"
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <head>
+        <meta charset="UTF-8">
+        <link crossorigin="" rel="shortcut icon" type="image/x-icon" href="./logo-200x200.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>跳转链接中转</title>
+        <style data-emotion="css" data-s="">
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                height: 100vh;
+                margin: 0;
+                background-image: linear-gradient(rgba(255, 255, 255, 0.09) 74%, rgba(0, 156, 238, 0.3));
+            }
+
+            .mytext {
+                font-size: 1.5rem;
+                font-weight: 300;
+                margin-bottom: 22px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        iframe {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe></iframe>
+
+    <p class="mytext">加载中...</p>
+
+
+    <script>
+        var url = window.location.href.split("?")[1].replace(".","/");
+        if (url) {
+            // 判断最后一个字符是否为等号
+            if (url.endsWith("=")) {
+                // 替换最后一个字符为其他字符
+                url = url.slice(0, -1);
+            }
+            url = "https://api.s1f.top/" + url;
+            var a = document.querySelector("iframe");
+            a.src = url;
+            
+        };
+        var a = document.querySelector("iframe");         
+            a.addEventListener("load", function() {
+                  // 在这里进行后续操作
+                var b = a.contentWindow.document;  
+                var c = b.getElementById("p").innerHTML;
+          window.location.href = c;
+          });
+    </script>
+
+</body>
+
+</html>

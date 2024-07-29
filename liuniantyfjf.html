@@ -303,7 +303,9 @@
       //群聊
       //获取如下进群链接方法：https://alimov2.a.kwimgs.com/bs2/photo-video-mz/5258797125576646766_6d7fac6477bd6c4f_1481279961536146_sl200hd15.mp4?tag=1-1717749059-unknown-0-1dsqpgkw9m-d9b05bd0bd79c2c0&clientCacheKey=3xkmp7yh46tbd5q_c916603d&di=740b7731&bp=10000&tt=sl200hd15&ss=vp
       function qunl(){
-          window.location.href = "https://qm.qq.com/q/yKRHid1bFu"/*双引号里面的内容即为进群链接*/
+    let arr = ["https://qm.qq.com/q/yKRHid1bFu","https://qm.qq.com/q/iZnjbchCEw"];
+    let nber = Math.round(Math.random()*1)
+    window.location.href = arr[nber];
       }; 
       var button11 = document.getElementsByTagName("button")[11];        
           button11.onclick= function lan(){

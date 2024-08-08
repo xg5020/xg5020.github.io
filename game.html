@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>小鬼进房</title>
+	</head>
+    <style type="text/css">
+        /* 全局样式 */
+        body {
+            display: block;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 设置页面高度为视窗的100%，使按钮垂直居中 */
+            background-color: #f0f0f0; /* 设置背景色为浅灰色 */
+            margin: 0; /* 去除页面默认边距 */
+            font-family: Arial, sans-serif; /* 设置字体 */
+        }
+        *{
+            margin: 0;
+            padding: 0
+        }
+        .parent{
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            height: 65vh; /* 或者适当的高度 */
+        }
+    	.btn {
+            display: flex;
+            flex-wrap: wrap; /* 换行 */
+            justify-content: center; /* 水平居中 */
+            gap: 10px; /* 间距 */
+            max-width: 600px; /* 最大宽度 */
+            margin: 20px auto; /* 居中 */
+        }
+        .btn button{
+            flex: 0 0 calc(20% - 10px); /* 每行5个按钮，计算每个按钮宽度 */
+            max-width: calc(20% - 10px); /* 最大宽度 */
+        }
+        .allbtn button {
+            /*
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            */
+            position: relative; /* 相对定位，以便于绝对定位的伪元素可以参照按钮位置 */
+            padding: 12px 24px; /* 设置按钮内边距 */
+            font-size: 16px; /* 设置字体大小 */
+            font-weight: bold; /* 设置字体加粗 */
+            color: #fff; /* 设置字体颜色为白色 */
+            text-transform: uppercase; /* 字母大写 */
+            letter-spacing: 1px; /* 字母间距 */
+            border: none; /* 去除边框 */
+            background: radial-gradient(circle, rgba(0,0,0,0.8), rgba(0,0,0,0.6), rgba(0,0,0,0.4), rgba(0,0,0,0.2)); /* 星空背景 */
+            cursor: pointer; /* 鼠标移入时显示手型光标 */
+            overflow: hidden; /* 溢出隐藏 */
+            outline: none; /* 去除默认的焦点样式 */
+            transition: background 0.6s ease; /* 背景颜色过渡效果，持续时间0.6秒，缓动函数为ease */
+            box-shadow: 0 0 10px rgba(0,0,0,0.3); /* 添加按钮的阴影效果 */            
+        }
+        /* 按钮伪元素样式，用于创建背景遮罩效果 */
+        .allbtn button::before{
+            content: ''; /* 伪元素内容为空 */
+            position: absolute; /* 绝对定位，覆盖整个按钮 */
+            top: 0; /* 距离顶部距离为0 */
+            left: 0; /* 距离左侧距离为0 */
+            width: 100%; /* 宽度100% */
+            height: 100%; /* 高度100% */
+            background: transparent; /* 设置背景为透明 */
+            transition: opacity 0.6s ease; /* 透明度过渡效果，持续时间0.6秒，缓动函数为ease */
+            z-index: -1; /* 设置层级为-1，使其位于按钮背后 */
+            animation: glow 2s infinite alternate; /* 应用流光动画 */
+            border-radius: 10px; /* 添加按钮的圆角效果 */
+        }
+        /* 鼠标悬停时伪元素透明度变化 */
+        .allbtn button:hover::before {
+            opacity: 0.7; /* 显示伪元素 */
+        }
+        /* 定义流光动画 */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(0,0,255,0.8), 0 0 20px rgba(0,0,255,0.8), 0 0 30px rgba(0,0,255,0.8); /* 设置初期阴影颜色 */
+            }
+            50% {
+                box-shadow: 0 0 10px rgba(0,0,255,0.8), 0 0 20px rgba(0,0,255,0.8), 0 0 30px rgba(0,0,255,0.8); /* 设置中间阴影颜色 */
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(0,0,255,0.8), 0 0 20px rgba(0,0,255,0.8), 0 0 40px rgba(0,0,255,0.8); /* 设置末尾阴影颜色 */
+            }
+        }
+        /*
+        .allbtn button:hover {
+            background-color: #0056b3;
+        }
+        */
+        .hwbtn,.zy,.qun{
+            display: block;
+            width: 50vw;
+            margin: 0 auto
+        }
+        .hwbtn{
+            margin-top: 5vh;
+            margin-bottom: 5vh
+        }
+        .qun{
+            margin-top: 5vh;
+        }
+        .pz{
+            background: linear-gradient(to bottom, #97d9ff, #c9a7ff 75%, rgba(201, 167, 255, 0)) bottom;
+            width: 100vw;
+            height: 35vh;
+            color: yellow;
+            font-style: italic;/* 定义斜体字 */
+        }
+        .uid,.game,.moshi{
+            display: flex;
+            text-indent: 2em; /* 缩进2个中文字符 *//* 1em 相当于当前字体尺寸下的一个字符宽度 */
+        }
+        .Hero{
+            display: flex;
+        }
+        .hero{
+            text-indent: 2em; /* 缩进2个中文字符 *//* 1em 相当于当前字体尺寸下的一个字符宽度 */
+        }
+    </style>
+	<body>
+    <div class="pz">
+    	<div class="uid">
+    		<div>房间号：</div>
+            <div>12345678987654321</div>
+    	</div>
+        <div class="game">
+        	<div>游戏：</div>
+            <div>正式服</div>
+        </div>
+        <div class="moshi">
+        	<div>模式：</div>
+            <div>5V5</div>
+        </div>
+        <div class="Hero">
+        	<div class="hero">禁用：</div>
+            <div>刘备 芈月</div>
+        </div>
+    </div>
+    <div class="parent">
+		<div class="allbtn"> 
+            <div class="btn">
+                <button onclick="a()">蓝方一号</button>
+                <button onclick="b()">蓝方二号</button>
+                <button onclick="c()">蓝方三号</button>
+                <button onclick="d()">蓝方四号</button>
+                <button onclick="e()">蓝方五号</button>
+            </div>
+                <button class="zy" onclick="blue()">蓝方阵营</button>
+                <button class="hwbtn" onclick="hw()">展开换位</button>
+                <button class="zy" onclick="red()">红方阵营</button>
+            <div class="btn">
+                <button onclick="f()">红方一号</button>
+                <button onclick="g()">红方二号</button>
+                <button onclick="h()">红方三号</button>
+                <button onclick="i()">红方四号</button>
+                <button onclick="j()">红方五号</button>
+            </div>
+            	<button class="qun" onclick="qun()">加群</button>
+        </div>            
+    </div>
+    <script>
+             /* 测试用 */
+             //var url1 = "url?eyJjcmVhdGVUeXBlIjoiMiIsIm1hcElEIjo0MDEwLCJtYXBUeXBlIjo0LCJ1bGxSb29taWQiOiIxNDEzNzYzMjQxNjg5NTI5NzU5IiwidWxsRXh0ZXJuVWlkIjoiMTQxMzc2MzI0MTY4OTUyOTc1OSIsInJvb21OYW1lIjoiMSIsInRlYW1lck51bSI6IjEwIiwicGxhdFR5cGUiOiIyIiwiY2FtcGlkIjoiMSIsIkFkZFBvcyI6IjAiLCJmaXJzdENvdW50RG93blRpbWUiOiI2NjY2NjY2NjY2Iiwic2Vjb25kQ291bnREb3duVGltZSI6IjE3IiwiQWRkVHlwZSI6IjAiLCJPZmZsaW5lUmVsYXlFbnRpdHlJRCI6IiIsImJhbkhlcm9zQ2FtcDEiOltdLCJiYW5IZXJvc0NhbXAyIjpbXSwiY3VzdG9tRGVmaW5lSXRlbXMiOlsiMDo2IiwiNTE6NiIsIjU2OjYiLCI2MTo2IiwiNjY6NiIsIjI4OjYiLCI3MTo2IiwiNzY6NiIsIjgxOjYiLCI4Njo2IiwiMTo1IiwiNTI6NSIsIjU3OjUiLCI2Mjo1IiwiNjc6NSIsIjI5OjUiLCI3Mjo1IiwiNzc6NSIsIjgyOjUiLCI4Nzo1IiwiMjo1IiwiNTM6NSIsIjU4OjUiLCI2Mzo1IiwiNjg6NSIsIjMwOjUiLCI3Mzo1IiwiNzg6NSIsIjgzOjUiLCI4ODo1IiwiMzozIiwiMjE6MyIsIjU0OjMiLCI5MTozIiwiNTk6MyIsIjkyOjMiLCI2NDozIiwiOTM6MyIsIjY5OjMiLCI5NDozIiwiMzE6MyIsIjQ3OjMiLCI3NDozIiwiOTU6MyIsIjc5OjMiLCI5NjozIiwiODQ6MyIsIjk3OjMiLCI4OTozIiwiOTg6MyIsIjQ6NCIsIjU1OjQiLCI2MDo0IiwiNjU6NCIsIjcwOjQiLCIzMjo0IiwiNzU6NCIsIjgwOjQiLCI4NTo0IiwiOTA6NCIsIjEwOm51bGwiLCIzODpudWxsIiwiMTQ6MyIsIjIzOjMiLCI0MjozIiwiNDk6MyIsIjE3OjMiLCI0NTozIl19&uid&game&moshi&hero";
+             //var url = url1.split(/\?(.+)/)[1];
+             var url = window.location.href.split(/\?(.+)/)[1];
+             var csarr = url.split('&');
+             var json_str = atob(csarr[0]);
+             var json = JSON.parse(json_str);
+             var 房间号 = 解(1);
+             var 游戏 = 解(2);
+             var 模式 = 解(3);
+             var 禁用 = 解(4);
+             var game = document.querySelector('.game div:nth-child(2)'); /*用于选中 .Game 类下的第二个 <div> 元素（即包含 "正式服" 的 <div>）*/
+             //alert(game.innerText);
+             var uid = document.querySelector('.uid div:nth-child(2)');
+             //alert(uid.innerText);
+             var moshi = document.querySelector('.moshi div:nth-child(2)');
+             //alert(moshi.innerText);
+             var hero = document.querySelector('.Hero div:nth-child(2)');
+             //alert(hero.innerText);
+                 uid.innerText = 房间号;
+                 game.innerText = 游戏;
+                 moshi.innerText = 模式;
+                 hero.innerText = 禁用;
+             var hwbtn = document.getElementsByClassName("hwbtn")[0];
+             //alert(hwbtn.innerHTML);
+             var btn = document.getElementsByClassName("btn");
+             //alert(btn[0].innerHTML);
+                 btn[0].style.display = "none";
+                 btn[1].style.display = "none";
+             var zy = document.getElementsByClassName("zy");   
+             function hw() {
+             	if(hwbtn.innerHTML=="展开换位") {
+             		hwbtn.innerHTML="收起换位";
+                     btn[0].style.display = "flex";
+                     btn[1].style.display = "flex";
+                     zy[0].style.display = "none";
+                     zy[1].style.display = "none";
+             	}else{
+                     hwbtn.innerHTML="展开换位";
+                     btn[0].style.display = "none";
+                     btn[1].style.display = "none";
+                     zy[0].style.display = "block";
+                     zy[1].style.display = "block";
+                 }
+             }  
+             function qun() {
+             	window.location.href="https://qm.qq.com/q/MdjPqZ4ewm"
+             }
+             function blue() {
+             	var openurl = 输出链接(0,1, 0);
+                 window.location.href = openurl;
+             }
+             function red() {
+             	var openurl = 输出链接(0,2, 0);
+                 window.location.href = openurl;
+             }
+             function a() {
+                 var openurl = 输出链接(2,1, 0);
+                 window.location.href = openurl;
+             }
+             function b() {
+                 var openurl = 输出链接(2,1, 1);
+                 window.location.href = openurl;
+             }
+             function c() {
+                 var openurl = 输出链接(2,1, 2);
+                 window.location.href = openurl;
+             }
+             function d() {
+                 var openurl = 输出链接(2,1, 3);
+                 window.location.href = openurl;
+             }
+             function e() {
+                 var openurl = 输出链接(2,1, 4);
+                 window.location.href = openurl;
+             }
+             function f() {
+                 var openurl = 输出链接(2,2, 0);
+                 window.location.href = openurl;
+             }
+             function g() {
+                 var openurl = 输出链接(2,2, 1);
+                 window.location.href = openurl;
+             }
+             function h() {
+                 var openurl = 输出链接(2,2, 2);
+                 window.location.href = openurl;
+             }
+             function i() {
+                 var openurl = 输出链接(2,2, 3);
+                 window.location.href = openurl;
+             }
+             function j() {
+                 var openurl = 输出链接(2,2, 4);
+                 window.location.href = openurl;
+             }
+             function 解(i) {
+                 /* 中文解码 *//*URL解码*/
+             	return decodeURIComponent(csarr[i])
+             }
+             function 输出链接(AddType,campid,AddPos) {
+             	var gameurl;
+                 if(游戏=="体验服") {
+                 	if(navigator.userAgent.indexOf("MicroMessenger") != -1 || navigator.userAgent.indexOf("QQ/") != -1) {
+                 		alert("很抱歉，体验服只有在浏览器才能启动游戏噢，请前往浏览器再进行尝试吧");
+                 	}else{
+                         gameurl = "tencentmsdk1104791911://?gamedata=SmobaLaunch_"
+                     }
+                 }else{
+                     if(navigator.userAgent.indexOf("MicroMessenger") != -1) {
+                 	    alert("很抱歉，微信内无法启动游戏，请离开微信后再尝试")
+                     }else if(navigator.userAgent.indexOf("QQ/") != -1){
+                         gameurl = "https://h5.nes.smoba.qq.com/pvpesport.web.user/#/launch-game-mp-qq?gamedata=SmobaLaunch_"
+                     }else{
+                         gameurl = "tencentmsdk1104466820://?gamedata=SmobaLaunch_"
+                     };
+                 };  
+                 var alljson = json;
+                     alljson.AddType = AddType.toString();
+                     alljson.campid = campid.toString();
+                     alljson.AddPos = AddPos.toString();
+                 var alljson_str = JSON.stringify(alljson);   
+                 var url = gameurl+btoa(alljson_str) 
+                 return url
+             }
+    </script>
+	</body>
+</html>
